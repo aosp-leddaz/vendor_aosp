@@ -55,4 +55,8 @@ PRODUCT_PACKAGES += \
     charger_res_images \
     product_charger_res_images
 
+# Repainter integration
+PRODUCT_PACKAGES += \
+    RepainterServicePriv
+
 -include vendor/statix/config/overlay.mk
