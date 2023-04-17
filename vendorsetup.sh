@@ -10,3 +10,5 @@ for device in ${devices[@]}; do
 done
 
 cat vendor/statix/bootanimation/bootanimation.00 vendor/statix/bootanimation/bootanimation.01 > vendor/statix/bootanimation/bootanimation.zip
+
+export SKIP_ABI_CHECKS=true
