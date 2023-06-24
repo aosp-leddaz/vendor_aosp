@@ -157,4 +157,7 @@
         <item>"/system/bin/surfaceflinger"</item>
         <item>"/system_ext/priv-app/StatixSystemUI/StatixSystemUI.apk"</item>
     </string-array>
+
+    <!-- Default value for performant auth feature. -->
+    <bool name="config_performantAuthDefault">true</bool>
 </resources>
