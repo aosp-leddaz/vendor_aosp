@@ -16,8 +16,17 @@
 #
 
 # Boot Animation
+scr_resolution := 1440
+aosp_device := $(patsubst %f,%,$(subst aosp_,,$(TARGET_PRODUCT)))
+
+ifneq ($(filter mido oneplus3,$(aosp_device)),)
+scr_resolution := 1080
+endif
+
+ifneq ($(wildcard vendor/aosp/bootanimation/bootanimation_$(scr_resolution).zip),)
 PRODUCT_COPY_FILES += \
-    vendor/statix/bootanimation/bootanimation.zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
+    vendor/aosp/bootanimation/bootanimation_$(scr_resolution).zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
+endif
 
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/media/bootanimation.zip

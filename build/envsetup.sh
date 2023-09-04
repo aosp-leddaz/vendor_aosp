@@ -11,7 +11,7 @@ function breakfast()
     target=$1
     STATIX_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
-    for f in `/bin/ls vendor/statix/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/aosp/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -41,7 +41,7 @@ function brunch()
 {
     breakfast $*
     if [ $? -eq 0 ]; then
-        time m bacon
+        time m
     else
         echo "No such item in brunch menu. Try 'breakfast'"
         return 1
@@ -51,12 +51,12 @@ function brunch()
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/statix/build/tools/repopick.py $@
+    $T/vendor/aosp/build/tools/repopick.py $@
 }
 
 function aospmerge()
 {
     target_branch=$1
     T=$(gettop)
-    python3 $T/vendor/statix/scripts/merge-aosp.py target_branch
+    python3 $T/vendor/aosp/scripts/merge-aosp.py target_branch
 }

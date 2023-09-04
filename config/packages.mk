@@ -10,45 +10,13 @@ PRODUCT_PACKAGES += \
 
 # StatiX Packages
 PRODUCT_PACKAGES += \
-    CustomDoze \
     RepainterServicePriv \
     SimpleDeviceConfig \
-    StatiXOSWalls \
     QuickAccessWallet
-
-# App overrides
-PRODUCT_PACKAGES += \
-    StatixLauncher \
-    StatixSystemUI \
-    StatixSettings \
-    StatixThemePicker \
-    SystemUIFlagFlipper
 
 # Camera
 PRODUCT_PACKAGES += \
     Aperture
-
-# Preopt StatixSystemUI
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    StatixSystemUI
-
-# Google Pixel Launcher
-ifeq ($(INCLUDE_PIXEL_LAUNCHER),true)
-PRODUCT_PACKAGES += \
-    PixelLauncher
-endif
-
-# Updaters
-ifeq ($(STATIX_BUILD_TYPE),OFFICIAL)
-PRODUCT_PACKAGES += \
-    Updater
-endif
-
-# Some useful shell based utilities for Android
-PRODUCT_PACKAGES += \
-    htop \
-    nano \
-    vim
 
 # Charger images
 PRODUCT_PACKAGES += \
@@ -59,4 +27,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     RepainterServicePriv
 
--include vendor/statix/config/overlay.mk
+# Overlays
+PRODUCT_PACKAGES += \
+    PixelLauncherConfigOverlay

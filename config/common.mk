@@ -4,22 +4,16 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-include vendor/statix/build/core/vendor/*.mk
+include vendor/aosp/build/core/vendor/*.mk
 
 # Conditionally call QCOM makefiles
 ifeq ($(PRODUCT_USES_QCOM_HARDWARE), true)
-include vendor/statix/build/core/ProductConfigQcom.mk
+include vendor/aosp/build/core/ProductConfigQcom.mk
 endif
 
 # Define some properties for GMS
 ifneq ($(TARGET_DOES_NOT_USE_GAPPS), true)
 $(call inherit-product-if-exists, vendor/gms/products/gms.mk)
-# Anything including updatable_apex.mk should have done so by now.
-ifeq ($(TARGET_FLATTEN_APEX), false)
-$(call inherit-product-if-exists, vendor/partner_modules/build/mainline_modules.mk)
-else
-$(call inherit-product-if-exists, vendor/partner_modules/build/mainline_modules_flatten_apex.mk)
-endif
 endif
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
@@ -52,16 +46,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.surface_flinger.supports_background_blur=1
 endif
 
-# Make some features conditional
-ifeq ($(ENABLE_GAMETOOLS), true)
-PRODUCT_COPY_FILES += \
-    vendor/statix/prebuilt/etc/sysconfig/game_service.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/game_service.xml
-endif
-ifneq ($(DISABLE_COLUMBUS), true)
-PRODUCT_COPY_FILES += \
-    vendor/statix/prebuilt/etc/sysconfig/quick_tap.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/quick_tap.xml
-endif
-
 # Enable support of one-handed mode
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.support_one_handed_mode=true
@@ -70,39 +54,30 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     sys.fflag.override.settings_volume_panel_in_systemui=true
 
-# Copy over some StatiX assets
+# Copy over some AOSP assets
 PRODUCT_COPY_FILES += \
-    vendor/statix/prebuilt/etc/init.statix.rc:system/etc/init/init.statix.rc \
-    vendor/statix/prebuilt/etc/permissions/privapp-permissions-statix-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-statix-product.xml \
-    vendor/statix/prebuilt/etc/permissions/privapp-permissions-statix-se.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-statix-se.xml
-
-# Build ID
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_DISPLAY_ID="$(BUILD_ID)-$(TARGET_BUILD_VARIANT)"
+    vendor/aosp/prebuilt/etc/permissions/privapp-permissions-aosp-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-aosp-product.xml \
+    vendor/aosp/prebuilt/etc/permissions/privapp-permissions-aosp-se.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-aosp-se.xml
 
 # Compile SystemUI on device with `speed`.
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.systemuicompilerfilter=speed
 
 # Packages
-include vendor/statix/config/packages.mk
-
-# Branding
-include vendor/statix/config/branding.mk
+include vendor/aosp/config/packages.mk
 
 # Bootanimation
-include vendor/statix/config/bootanimation.mk
+include vendor/aosp/config/bootanimation.mk
 
 # Fonts
-include vendor/statix/config/fonts.mk
+include vendor/aosp/config/fonts.mk
 
 # Overlays
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/statix/overlay
-DEVICE_PACKAGE_OVERLAYS += vendor/statix/overlay/common
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/aosp/overlay
+DEVICE_PACKAGE_OVERLAYS += vendor/aosp/overlay
 
 # Artifact path requirements
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
-    system/etc/init/init.statix.rc \
     system/lib/libRSSupport.so \
     system/lib/libblasV8.so \
     system/lib/librsjni.so \
