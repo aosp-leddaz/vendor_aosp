@@ -8,9 +8,8 @@
 PRODUCT_PACKAGES += \
     librsjni
 
-# StatiX Packages
+# AOSP Packages
 PRODUCT_PACKAGES += \
-    RepainterServicePriv \
     SimpleDeviceConfig \
     QuickAccessWallet
 
@@ -22,7 +21,3 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     charger_res_images \
     product_charger_res_images
-
-# Repainter integration
-PRODUCT_PACKAGES += \
-    RepainterServicePriv
