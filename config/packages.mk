@@ -26,7 +26,3 @@ PRODUCT_PACKAGES += \
 # Repainter integration
 PRODUCT_PACKAGES += \
     RepainterServicePriv
-
-# Overlays
-PRODUCT_PACKAGES += \
-    PixelLauncherConfigOverlay
